@@ -1,10 +1,29 @@
 server:
   port: 8888
 spring:
+  profiles:
+    active: native
   application:
     name: config-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   cloud:
     config:
       server:
+        native:
+          search-locations: file://${user.home}/IdeaProjects/git-local-repo
         git:
-          uri: file:///Users/pyeondohun/IdeaProjects/git-local-repo
+#          uri: file:///Users/pyeondohun/IdeaProjects/git-local-repo
+          uri: https://github.com/bigbulgogiburger/spring-config
+          default-label: master
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh
